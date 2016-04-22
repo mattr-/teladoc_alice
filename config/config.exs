@@ -3,9 +3,9 @@
 use Mix.Config
 
 config :alice,
-  api_key: System.get_env("ALICE_SLACK_API_TOKEN")
+  api_key: System.get_env("SLACK_API_TOKEN"),
   state_backend: :redis,
-  redis: System.get_env("REDIS_URL")
+  redis: System.get_env("REDISTOGO_URL")
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,
