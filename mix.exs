@@ -36,6 +36,7 @@ defmodule TeladocAlice.Mixfile do
   defp deps do
     [
       {:websocket_client, github: "jeremyong/websocket_client"},
+      {:poison, "~> 2.1"},
       {:alice,                  "~> 0.3.0"},
       {:alice_google_images, "~> 0.1"},
       {:alice_karma, "~> 0.1"}
