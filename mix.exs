@@ -18,6 +18,8 @@ defmodule TeladocAlice.Mixfile do
      mod: {
        Alice, [
          Alice.Handlers.Utils,
+         Alice.Handlers.GoogleImages,
+         Alice.Handlers.Karma
        ]
      }]
   end
@@ -35,6 +37,8 @@ defmodule TeladocAlice.Mixfile do
     [
       {:websocket_client, github: "jeremyong/websocket_client"},
       {:alice,                  "~> 0.3.0"},
+      {:alice_google_images, "~> 0.1"},
+      {:alice_karma, "~> 0.1"}
     ]
   end
 end
