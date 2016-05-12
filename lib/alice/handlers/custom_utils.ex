@@ -1,4 +1,4 @@
-defmodule Alice.Handlers.Utility do
+defmodule Alice.Handlers.CustomUtils do
 
   use Alice.Router
 

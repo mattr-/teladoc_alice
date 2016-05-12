@@ -20,7 +20,8 @@ defmodule TeladocAlice.Mixfile do
          Alice.Handlers.Utils,
          Alice.Handlers.GoogleImages,
          Alice.Handlers.Karma,
-         Alice.Handlers.Personable
+         Alice.Handlers.Personable,
+         Alice.Handlers.CustomUtils
        ]
      }]
   end
