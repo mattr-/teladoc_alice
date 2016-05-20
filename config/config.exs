@@ -11,3 +11,7 @@ config :alice_google_images,
   cse_id: System.get_env("GOOGLE_CSE_ID"),
   cse_token: System.get_env("GOOGLE_CSE_TOKEN"),
   safe_search_level: :medium
+
+config :alice_jira,
+  jira_url: System.get_env("JIRA_URL"),
+  jira_basic_auth_token: System.get_env("JIRA_BASIC_AUTH_TOKEN")
