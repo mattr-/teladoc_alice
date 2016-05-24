@@ -42,7 +42,8 @@ defmodule TeladocAlice.Mixfile do
       {:poison, "~> 2.1"},
       {:alice,                  "~> 0.3.0"},
       {:alice_google_images, "~> 0.1"},
-      {:alice_karma, "~> 0.1"}
+      {:alice_karma, "~> 0.1"},
+      {:alice_personable, "0.0.2"},
     ]
   end
 end
