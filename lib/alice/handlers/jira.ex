@@ -3,6 +3,7 @@ defmodule Alice.Handlers.Jira do
   import Application, only: [get_env: 2]
 
   alias Alice.Conn
+  alias Alice.Router.Helpers
 
   route ~r/\b(\w+-\d+)\b/i, :jira
 
@@ -12,8 +13,12 @@ defmodule Alice.Handlers.Jira do
   chat. Emulates HipChat's display of JIRA tickets
   """
   def jira(conn) do
+    issues = ~r/\w+-\d+/ |> Regex.scan(conn.message.text) |> List.flatten
+    Enum.reduce(issues, conn, fn(issue, conn) -> get_issue_details(issue, conn) end)
+  end
+
+  def get_issue_details(issue, conn) do
     conn = indicate_typing(conn)
-    issue = Conn.last_capture(conn)
     url = Enum.join([get_env(:alice_jira, :jira_url), "browse", issue], "/")
     headers = %{"Authorization" => "Basic #{get_env(:alice_jira, :jira_basic_auth_token)}"}
     case HTTPoison.head(url, headers) do
