@@ -14,17 +14,22 @@ defmodule TeladocAlice.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :alice],
-     mod: {
-       Alice, [
-         Alice.Handlers.Utils,
-         Alice.Handlers.GoogleImages,
-         Alice.Handlers.Karma,
-         Alice.Handlers.Personable,
-         Alice.Handlers.CustomUtils,
-         Alice.Handlers.Jira
-       ]
-     }]
+    [
+      applications: [:logger, :alice],
+      mod: {
+        Alice, %{
+          handlers: [
+            Alice.Handlers.Utils,
+            Alice.Handlers.GoogleImages,
+            Alice.Handlers.Karma,
+            Alice.Handlers.Personable,
+            Alice.Handlers.CustomUtils,
+            Alice.Handlers.Jira,
+            Alice.Handlers.Jenkins
+          ]
+        }
+      }
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -40,7 +45,7 @@ defmodule TeladocAlice.Mixfile do
     [
       {:websocket_client, github: "jeremyong/websocket_client"},
       {:poison, "~> 2.1"},
-      {:alice,                  "~> 0.3.0"},
+      {:alice,  "~> 0.3.0"},
       {:alice_google_images, "~> 0.1"},
       {:alice_karma, "~> 0.1"},
       {:alice_personable, "0.0.2"},
