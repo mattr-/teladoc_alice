@@ -3,9 +3,23 @@
 use Mix.Config
 
 config :alice,
+  adapter: Alice.Adapters.Slack,
   api_key: System.get_env("SLACK_API_TOKEN"),
+  slack: [key: System.get_env("SLACK_API_TOKEN")],
+  handlers: [
+    Alice.Handlers.Utils,
+    Alice.Handlers.GoogleImages,
+    Alice.Handlers.Karma,
+    Alice.Handlers.Personable,
+    Alice.Handlers.CustomUtils,
+    Alice.Handlers.Jira,
+    Alice.Handlers.Jenkins
+  ],
   state_backend: :redis,
-  redis: System.get_env("REDISTOGO_URL")
+  redis: System.get_env("REDISTOGO_URL"),
+  jenkins_host: System.get_env("JENKINS_HOST"),
+  jenkins_job: System.get_env("JENKINS_JOB"),
+  jenkins_token: System.get_env("JENKINS_TOKEN")
 
 config :alice_google_images,
   cse_id: System.get_env("GOOGLE_CSE_ID"),
