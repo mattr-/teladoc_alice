@@ -14,7 +14,7 @@ defmodule Alice.Handlers.Jira do
   """
   def jira(conn) do
     issues = ~r/\w+-\d+/ |> Regex.scan(conn.message.text) |> List.flatten
-    Enum.reduce(issues, conn, fn(issue, conn) -> get_issue_details(issue, conn) end)
+    Enum.reduce(filtered_issues(issues), conn, fn(issue, conn) -> get_issue_details(issue, conn) end)
   end
 
   def get_issue_details(issue, conn) do
@@ -25,5 +25,9 @@ defmodule Alice.Handlers.Jira do
       {:ok, %HTTPoison.Response{status_code: 200}} -> url |> reply(conn)
       _ -> conn
     end
+  end
+
+  def filtered_issues(issues) do
+    Enum.uniq(issues)
   end
 end
