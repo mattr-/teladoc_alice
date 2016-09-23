@@ -16,8 +16,7 @@ defmodule Alice.Handlers.Jira do
   end
 
   def get_issue_details(issue, conn) do
-    headers = %{"Authorization" => "Basic #{get_env(:alice_jira, :jira_basic_auth_token)}"}
-    case HTTPoison.head(url_for_issue(issue), headers) do
+    case HTTPoison.get(url_for_issue(issue), authorization_header) do
       {:ok, %HTTPoison.Response{status_code: 200}} -> url_for_issue(issue) |> reply(conn)
       _ -> conn
     end
@@ -29,5 +28,9 @@ defmodule Alice.Handlers.Jira do
 
   def url_for_issue(issue) do
     Enum.join([get_env(:alice_jira, :jira_url), "browse", issue], "/")
+  end
+
+  def authorization_header do
+    %{"Authorization" => "Basic #{get_env(:alice_jira, :jira_basic_auth_token)}"}
   end
 end
