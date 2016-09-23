@@ -2,9 +2,6 @@ defmodule Alice.Handlers.Jira do
   use Alice.Router
   import Application, only: [get_env: 2]
 
-  alias Alice.Conn
-  alias Alice.Router.Helpers
-
   route ~r/\b(\w+-\d+)\b/i, :jira
 
 
@@ -19,15 +16,18 @@ defmodule Alice.Handlers.Jira do
 
   def get_issue_details(issue, conn) do
     conn = indicate_typing(conn)
-    url = Enum.join([get_env(:alice_jira, :jira_url), "browse", issue], "/")
     headers = %{"Authorization" => "Basic #{get_env(:alice_jira, :jira_basic_auth_token)}"}
-    case HTTPoison.head(url, headers) do
-      {:ok, %HTTPoison.Response{status_code: 200}} -> url |> reply(conn)
+    case HTTPoison.head(url_for_issue(issue), headers) do
+      {:ok, %HTTPoison.Response{status_code: 200}} -> url_for_issue(issue) |> reply(conn)
       _ -> conn
     end
   end
 
   def filtered_issues(issues) do
     Enum.uniq(issues)
+  end
+
+  def url_for_issue(issue) do
+    Enum.join([get_env(:alice_jira, :jira_url), "browse", issue], "/")
   end
 end
