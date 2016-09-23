@@ -10,12 +10,12 @@ defmodule Alice.Handlers.Jira do
   chat. Emulates HipChat's display of JIRA tickets
   """
   def jira(conn) do
+    conn = indicate_typing(conn)
     issues = ~r/\w+-\d+/ |> Regex.scan(conn.message.text) |> List.flatten
     Enum.reduce(filtered_issues(issues), conn, fn(issue, conn) -> get_issue_details(issue, conn) end)
   end
 
   def get_issue_details(issue, conn) do
-    conn = indicate_typing(conn)
     headers = %{"Authorization" => "Basic #{get_env(:alice_jira, :jira_basic_auth_token)}"}
     case HTTPoison.head(url_for_issue(issue), headers) do
       {:ok, %HTTPoison.Response{status_code: 200}} -> url_for_issue(issue) |> reply(conn)
