@@ -22,7 +22,8 @@ defmodule TeladocAlice.Mixfile do
          Alice.Handlers.Karma,
          Alice.Handlers.Personable,
          Alice.Handlers.CustomUtils,
-         Alice.Handlers.Jira
+         Alice.Handlers.Jira,
+         Alice.Handlers.Random
        ]
      }]
   end
