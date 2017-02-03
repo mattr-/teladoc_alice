@@ -16,7 +16,7 @@ defmodule TeladocAlice.Mixfile do
   def application do
     [applications: [:logger, :alice],
      mod: {
-       Alice, [
+       Alice, %{ handlers: [
          Alice.Handlers.Utils,
          Alice.Handlers.GoogleImages,
          Alice.Handlers.Karma,
@@ -24,7 +24,7 @@ defmodule TeladocAlice.Mixfile do
          Alice.Handlers.CustomUtils,
          Alice.Handlers.Jira,
          Alice.Handlers.Random
-       ]
+       ]}
      }]
   end
 
@@ -41,7 +41,8 @@ defmodule TeladocAlice.Mixfile do
     [
       {:websocket_client, github: "jeremyong/websocket_client"},
       {:poison, "~> 2.1"},
-      {:alice,                  "~> 0.3.0"},
+      # {:alice,                  "~> 0.3.0"},
+      {:alice, github: "alice-bot/alice", override: true },
       {:alice_google_images, "~> 0.1"},
       {:alice_karma, "~> 0.1"},
       {:alice_personable, "0.0.2"},
