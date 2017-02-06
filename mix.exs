@@ -39,7 +39,6 @@ defmodule TeladocAlice.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:websocket_client, github: "jeremyong/websocket_client"},
       {:poison, "~> 2.1"},
       # {:alice,                  "~> 0.3.0"},
       {:alice, github: "alice-bot/alice", override: true },
