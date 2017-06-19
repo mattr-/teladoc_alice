@@ -8,7 +8,6 @@ defmodule Alice.Handlers.Random do
   command ~r/thanks/i,                                     :thanks
   route ~r/\b(mad|angry|rage)\b/i,                         :u_mad_bro
   route ~r/\bno+pe+\b/i,                                   :nope_nope_nope
-  route ~r/\bdev[- ]?ops\b/i,                              :devops
 
   @doc "`wat` - wat"
   def wat(conn), do: "http://i.imgur.com/IppKJ.jpg"   |> reply(conn)
